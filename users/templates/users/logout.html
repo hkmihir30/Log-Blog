@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<h2>You have been logged out</h2>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        <!-- this is the way to write the link in href  -->
+        <!-- here we want to redirect to the login page  -->
+        <a href="{% url 'login' %}">Login again</a>
+    </small>
+</div>
+{% endblock content %}

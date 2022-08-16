@@ -1,0 +1,41 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+            <div class="media-body">
+                <h2 class="account-heading">{{user.username}}</h2>
+                <p class="text-secondary">{{user.email}}</p>
+            </div>
+        </div>
+        <!-- FORM HERE -->
+        <!-- this encoding type is added for the image data to be passed properly 
+        . If it won't be added then the image won't be save in the background -->
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- this is added security for any form in django  -->
+            <!-- without it the form won't work -->
+            {% csrf_token %}
+
+            <!-- this tag is used to group related tags -->
+            <fieldset class = "form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+
+                <!-- here as_p method is used to make it line by line 
+                by making a p tag for all the fields -->
+                <!-- {{ form.as_p }} -->
+
+                <!-- this is the use of filter by | using crispy -->
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+
+            </fieldset>
+
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock content %}
